@@ -1,4 +1,4 @@
-# smaregi-app-env
+# smaregi API POSTMAN template
 
 * import スマレジーサンプルーアプリ.postman_collection.json & スマレジーサンプルーアプリ-env.postman_environment.json to POSTMAN
 * change `contract_id` `client_id` `client_secret` to respective values obtained from samregi. 
