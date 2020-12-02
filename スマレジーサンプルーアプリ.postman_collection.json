@@ -1,0 +1,186 @@
+{
+	"info": {
+		"_postman_id": "d28d0e6a-a0dc-429d-8b97-748f7450c9a6",
+		"name": "スマレジーサンプルーアプリ",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Access Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Response contains 'access_token'\"] = jsonData.hasOwnProperty(\"access_token\");",
+							"postman.setEnvironmentVariable(\"access_token\", jsonData.access_token);",
+							""
+						],
+						"id": "3b5769b0-86f1-4b61-ac69-98ca1d8fed4d"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "{{client_id}}",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "{{client_secret}}",
+							"type": "string"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "text"
+						},
+						{
+							"key": "scope",
+							"value": "pos.stores:read",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://id.smaregi.dev/app/{{contract_id}}/token",
+					"protocol": "https",
+					"host": [
+						"id",
+						"smaregi",
+						"dev"
+					],
+					"path": [
+						"app",
+						"{{contract_id}}",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Store List",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "text"
+						},
+						{
+							"key": "scope",
+							"value": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://api.smaregi.dev/{{contract_id}}/pos/stores/",
+					"protocol": "https",
+					"host": [
+						"api",
+						"smaregi",
+						"dev"
+					],
+					"path": [
+						"{{contract_id}}",
+						"pos",
+						"stores",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "34d99fd4-b017-478e-bd47-f5f070758081",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "09dc197b-c0d8-4fa1-8ea2-8f519706b347",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "be7df3db-0f9e-47bc-a4fd-3970e2301bfc",
+			"key": "contract_id",
+			"value": "your_contract_id"
+		},
+		{
+			"id": "04e39797-9979-4c91-be13-1e4567dd4011",
+			"key": "client_id",
+			"value": "your_client_id"
+		},
+		{
+			"id": "f79b4dc0-40d3-4e50-bf4c-1a0b89c2a4ae",
+			"key": "client_secret",
+			"value": "your_client_secret"
+		}
+	],
+	"protocolProfileBehavior": {}
+}
