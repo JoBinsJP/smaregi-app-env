@@ -6,7 +6,7 @@
 	},
 	"item": [
 		{
-			"name": "Access Token",
+			"name": "アクセストークン",
 			"event": [
 				{
 					"listen": "test",
@@ -86,7 +86,7 @@
 			"response": []
 		},
 		{
-			"name": "Store List",
+			"name": "店舗一覧取得",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
